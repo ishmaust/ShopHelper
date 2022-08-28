@@ -1,10 +1,13 @@
 package user.ishmaust.shophelper.servicies;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import user.ishmaust.shophelper.repositories.dao.ContainerRepository;
 import user.ishmaust.shophelper.repositories.entity.Container;
+import user.ishmaust.shophelper.repositories.entity.Product;
+import user.ishmaust.shophelper.servicies.interfacies.EntityOperationService;
 
 @Service
 public class ContainerOperationService implements EntityOperationService<Container> {
@@ -29,6 +32,7 @@ public class ContainerOperationService implements EntityOperationService<Contain
   @Override
   public void updateEntity(Container entity) {
     containerRepository.updateContainerPlace(entity.getId(), entity.getPlace());
+
   }
 
   @Override
@@ -39,5 +43,10 @@ public class ContainerOperationService implements EntityOperationService<Contain
   @Override
   public void removeEntity(Container entity) {
     containerRepository.delete(entity);
+  }
+
+  @Override
+  public List<Container> getAllProduct() {
+    return containerRepository.findAll();
   }
 }

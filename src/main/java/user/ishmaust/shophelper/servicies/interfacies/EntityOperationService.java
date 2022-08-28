@@ -1,6 +1,8 @@
-package user.ishmaust.shophelper.servicies;
+package user.ishmaust.shophelper.servicies.interfacies;
 
+import java.util.List;
 import java.util.Optional;
+import user.ishmaust.shophelper.repositories.entity.Product;
 import user.ishmaust.shophelper.repositories.entity.interfacies.Dto;
 
 public interface EntityOperationService<T extends Dto> {
@@ -14,5 +16,7 @@ public interface EntityOperationService<T extends Dto> {
   void removeEntity(Long id);
 
   void removeEntity(T entity);
+
+  List<T> getAllProduct();
 
 }
