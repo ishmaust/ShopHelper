@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import user.ishmaust.shophelper.repositories.entity.Product;
-import user.ishmaust.shophelper.servicies.ContainerOperationService;
+import user.ishmaust.shophelper.servicies.ContainerServiceImpl;
 import user.ishmaust.shophelper.servicies.ProductServiceImpl;
 import user.ishmaust.shophelper.servicies.ProductUpdateService;
 
@@ -32,7 +32,7 @@ public class ProductController {
 
   @Autowired
   public ProductController(ProductServiceImpl productServiceImpl,
-      ContainerOperationService containerService, ProductUpdateService productUpdateService) {
+      ContainerServiceImpl containerService, ProductUpdateService productUpdateService) {
     this.productServiceImpl = productServiceImpl;
     this.productUpdateService = productUpdateService;
   }

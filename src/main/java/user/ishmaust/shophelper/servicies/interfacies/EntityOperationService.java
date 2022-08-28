@@ -11,12 +11,8 @@ public interface EntityOperationService<T extends Dto> {
 
   Optional<T> findById(Long id);
 
-  void updateEntity(T entity);
-
   void removeEntity(Long id);
 
   void removeEntity(T entity);
-
-  List<T> getAllProduct();
 
 }

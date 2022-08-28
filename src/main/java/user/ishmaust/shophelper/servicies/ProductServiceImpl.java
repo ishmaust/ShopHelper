@@ -30,14 +30,10 @@ public class ProductServiceImpl implements ProductService {
     return productRepository.save(entity);
   }
 
+  @Transactional
   @Override
   public Optional<Product> findById(Long id) {
     return productRepository.findById(id);
-  }
-
-  @Override
-  public void updateEntity(Product entity) {
-
   }
 
   @Override
@@ -60,6 +56,7 @@ public class ProductServiceImpl implements ProductService {
     return getAllProduct().stream().map(Product::getName).collect(Collectors.toSet());
   }
 
+  @Transactional
   @Override
   public void updateProductContainer(Long id, Container container) {
     productRepository.updateProductContainer(id, container);
