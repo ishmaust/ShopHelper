@@ -1,24 +1,18 @@
 package user.ishmaust.shophelper.servicies;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import user.ishmaust.shophelper.dto.ProductDto;
 import user.ishmaust.shophelper.exceptions.NotFoundEntityException;
 import user.ishmaust.shophelper.repositories.dao.ProductRepository;
-import user.ishmaust.shophelper.repositories.entity.Company;
-import user.ishmaust.shophelper.repositories.entity.Container;
 import user.ishmaust.shophelper.repositories.entity.Product;
 import user.ishmaust.shophelper.servicies.interfacies.CompanyService;
 import user.ishmaust.shophelper.servicies.interfacies.ProductService;
-import user.ishmaust.shophelper.utils.converters.ProductBuilder;
+import user.ishmaust.shophelper.utils.ProductBuilder;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -46,11 +40,13 @@ public class ProductServiceImpl implements ProductService {
     return productRepository.findById(id).orElseThrow(NotFoundEntityException::new);
   }
 
+  @Transactional
   @Override
   public void removeEntity(Long id) {
     productRepository.deleteById(id);
   }
 
+  @Transactional
   @Override
   public void removeEntity(Product entity) {
     productRepository.delete(entity);
@@ -76,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
   @Transactional
   @Override
   public Product updateProduct(ProductDto productDto, Long id) {
-    Product product = productRepository.findById(id).orElseThrow(NotFoundEntityException::new);
+    Product product = findById(id);
     if(product.equalsFields(productDto)) {
       return product;
     }
@@ -86,9 +82,10 @@ public class ProductServiceImpl implements ProductService {
 
   }
 
+  @Transactional
   @Override
   public Product deleteProduct(Long id) {
-    Product product = productRepository.findById(id).orElseThrow(NotFoundEntityException::new);
+    Product product = findById(id);
     removeEntity(id);
     return product;
   }

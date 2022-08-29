@@ -32,4 +32,17 @@ public class Container implements EntityMarker {
     @JoinColumn(name = "container_id", referencedColumnName = "id")
     private Set<Product> products;
 
+    @Override
+    public boolean equals(Object object) {
+        if(object == this) {
+            return true;
+        }
+
+        if(!(object instanceof Container)) {
+            return false;
+        }
+
+        Container container = (Container) object;
+        return this.id.equals(container.id) && this.place == container.place;
+    }
 }

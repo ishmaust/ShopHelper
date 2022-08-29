@@ -1,8 +1,7 @@
-package user.ishmaust.shophelper.utils.converters;
+package user.ishmaust.shophelper.utils;
 
 import org.springframework.stereotype.Component;
 import user.ishmaust.shophelper.dto.ProductDto;
-import user.ishmaust.shophelper.exceptions.NotFoundEntityException;
 import user.ishmaust.shophelper.repositories.entity.Company;
 import user.ishmaust.shophelper.repositories.entity.Container;
 import user.ishmaust.shophelper.repositories.entity.Product;
