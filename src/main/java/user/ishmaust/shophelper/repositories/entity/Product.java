@@ -10,17 +10,17 @@ import javax.persistence.PostLoad;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
-import user.ishmaust.shophelper.repositories.entity.interfacies.Dto;
+import user.ishmaust.shophelper.dto.ProductDto;
+import user.ishmaust.shophelper.repositories.entity.interfacies.EntityMarker;
 
 @Getter
 @Setter
 @Entity
-public class Product implements Dto {
+public class Product implements EntityMarker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -58,5 +58,30 @@ public class Product implements Dto {
     @PostLoad
     private void initValues() {
         this.shopPrice = this.orderPrice + (this.orderPrice*40)/100;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if(object == this) {
+            return true;
+        }
+
+        if(!(object instanceof Product)) {
+            return false;
+        }
+
+        Product product = (Product) object;
+        return this.name.equals(product.name) && this.description.equals(product.description) &&
+            this.orderPrice == product.orderPrice && this.margin == product.margin &&
+            this.count == product.count && this.minCount == product.minCount &&
+            this.container.equals(product.container) && this.company.equals(product.company);
+    }
+
+    public boolean equalsFields(ProductDto productDto) {
+        return this.name.equals(productDto.getName()) && this.description.equals(productDto.getDescription()) &&
+            this.orderPrice == productDto.getOrderPrice() && this.margin == productDto.getMargin() &&
+            this.count == productDto.getCount() && this.minCount == productDto.getMinCount() &&
+            this.container.getId().equals(productDto.getContainer()) &&
+            this.company.getName().equalsIgnoreCase(productDto.getCompany());
     }
 }

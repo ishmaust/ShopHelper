@@ -12,13 +12,13 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 import lombok.Getter;
 import lombok.Setter;
-import user.ishmaust.shophelper.repositories.entity.interfacies.Dto;
+import user.ishmaust.shophelper.repositories.entity.interfacies.EntityMarker;
 
 
 @Getter
 @Setter
 @Entity
-public class Container implements Dto {
+public class Container implements EntityMarker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

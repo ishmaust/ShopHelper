@@ -16,12 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 import user.ishmaust.shophelper.repositories.entity.Container;
 import user.ishmaust.shophelper.repositories.entity.Product;
 import user.ishmaust.shophelper.servicies.ContainerServiceImpl;
+import user.ishmaust.shophelper.servicies.interfacies.ContainerService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080/")
 @RequestMapping("/container")
 public class ContainerController {
-  private final ContainerServiceImpl containerService;
+  private final ContainerService containerService;
 
   @Autowired
   public ContainerController(ContainerServiceImpl containerService) {

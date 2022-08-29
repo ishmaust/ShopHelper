@@ -26,8 +26,8 @@ public class ContainerServiceImpl implements ContainerService {
   }
 
   @Override
-  public Optional<Container> findById(Long id) {
-    return containerRepository.findById(id);
+  public Container findById(Long id) {
+    return containerRepository.findById(id).orElseThrow(NotFoundEntityException::new);
   }
 
   @Override
@@ -42,10 +42,6 @@ public class ContainerServiceImpl implements ContainerService {
 
   @Override
   public Set<Product> getAllProductsFromContainerById(Long id) {
-    Optional<Container> optionalContainer = findById(id);
-    if(optionalContainer.isPresent()) {
-      return optionalContainer.get().getProducts();
-    }
-    throw new NotFoundEntityException();
+    return findById(id).getProducts();
   }
 }

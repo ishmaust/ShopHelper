@@ -13,14 +13,14 @@ import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 import user.ishmaust.shophelper.dto.OrderProduct;
-import user.ishmaust.shophelper.repositories.entity.interfacies.Dto;
+import user.ishmaust.shophelper.repositories.entity.interfacies.EntityMarker;
 import user.ishmaust.shophelper.utils.converters.OrderProductConverter;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "company_order")
-public class Order implements Dto {
+public class Order implements EntityMarker {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

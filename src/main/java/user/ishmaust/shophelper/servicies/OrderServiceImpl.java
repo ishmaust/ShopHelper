@@ -3,6 +3,7 @@ package user.ishmaust.shophelper.servicies;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import user.ishmaust.shophelper.exceptions.NotFoundEntityException;
 import user.ishmaust.shophelper.repositories.dao.OrderRepository;
 import user.ishmaust.shophelper.repositories.entity.Order;
 import user.ishmaust.shophelper.servicies.interfacies.OrderService;
@@ -23,8 +24,8 @@ public class OrderServiceImpl implements OrderService {
   }
 
   @Override
-  public Optional<Order> findById(Long id) {
-    return orderRepository.findById(id);
+  public Order findById(Long id) {
+    return orderRepository.findById(id).orElseThrow(NotFoundEntityException::new);
   }
 
   @Override

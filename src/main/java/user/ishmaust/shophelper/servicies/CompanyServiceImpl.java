@@ -3,6 +3,7 @@ package user.ishmaust.shophelper.servicies;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import user.ishmaust.shophelper.exceptions.NotFoundEntityException;
 import user.ishmaust.shophelper.repositories.dao.CompanyRepository;
 import user.ishmaust.shophelper.repositories.entity.Company;
 import user.ishmaust.shophelper.servicies.interfacies.CompanyService;
@@ -23,8 +24,8 @@ public class CompanyServiceImpl implements CompanyService {
   }
 
   @Override
-  public Optional<Company> findById(Long id) {
-    return companyRepository.findById(id);
+  public Company findById(Long id) {
+    return companyRepository.findById(id).orElseThrow(NotFoundEntityException::new);
   }
 
   @Override
@@ -35,5 +36,11 @@ public class CompanyServiceImpl implements CompanyService {
   @Override
   public void removeEntity(Company entity) {
     companyRepository.delete(entity);
+  }
+
+  @Override
+  public Company findByName(String name) {
+    return companyRepository.findCompanyByNameIgnoreCase(name.toLowerCase())
+        .orElseThrow(NotFoundEntityException::new);
   }
 }

@@ -1,5 +1,5 @@
 package user.ishmaust.shophelper.repositories.entity.interfacies;
 
-public interface Dto {
+public interface EntityMarker {
 
 }

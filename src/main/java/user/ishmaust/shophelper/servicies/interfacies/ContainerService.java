@@ -6,4 +6,5 @@ import user.ishmaust.shophelper.repositories.entity.Product;
 
 public interface ContainerService extends EntityOperationService<Container> {
   Set<Product> getAllProductsFromContainerById(Long id);
+
 }

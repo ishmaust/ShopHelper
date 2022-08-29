@@ -9,20 +9,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import user.ishmaust.shophelper.dto.CompanyInformation;
-import user.ishmaust.shophelper.repositories.entity.interfacies.Dto;
+import user.ishmaust.shophelper.repositories.entity.interfacies.EntityMarker;
 import user.ishmaust.shophelper.utils.converters.CompanyInformationConverter;
 
 @Entity
 @Getter
 @Setter
-public class Company implements Dto {
+public class Company implements EntityMarker {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  @NotBlank
+  private String name;
 
   @Convert(converter = CompanyInformationConverter.class)
   private CompanyInformation companyInformation;
